@@ -19,19 +19,9 @@ export default function Home() {
     setName(event.target.value);
   };
 
-  const isValidEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
   const handleSubmit = async () => {
     if (!name || !email) {
       toast.error("Please fill in all fields 😠");
-      return;
-    }
-
-    if (!isValidEmail(email)) {
-      toast.error("Please enter a valid email address 😠");
       return;
     }
 
@@ -39,7 +29,8 @@ export default function Home() {
 
     const promise = new Promise(async (resolve, reject) => {
       try {
-        const waitlistSubmission = await fetch("/api/submit_waitlist", {
+        // Submit to Supabase waitlist
+        const response = await fetch("/api/submit_waitlist", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -47,17 +38,29 @@ export default function Home() {
           body: JSON.stringify({ name, email }),
         });
 
-        if (!waitlistSubmission.ok) {
-          if (waitlistSubmission.status === 429) {
+        // Parse the response json
+        const data = await response.json();
+
+        if (!response.ok) {
+          if (response.status === 429) {
             reject("Rate limited");
+          } else if (response.status === 400) {
+            // Handle validation errors
+            const errorMessage = data.errors?.map((err: any) =>
+              `${err.message}`
+            ).join(', ');
+            reject(errorMessage || "Invalid submission data");
+          } else if (response.status === 409) {
+            // Handle duplicate email
+            reject(data.message || "Email already registered");
           } else {
-            reject("Waitlist submission failed");
+            reject(data.message || "Waitlist submission failed");
           }
         } else {
           resolve({ name });
         }
       } catch (error) {
-        reject(error);
+        reject("An error occurred during submission");
       }
     });
 
@@ -69,12 +72,7 @@ export default function Home() {
         return "Thank you for joining the waitlist 🎉";
       },
       error: (error) => {
-        if (error === "Rate limited") {
-          return "You're doing that too much. Please try again later";
-        } else if (error === "Waitlist submission failed") {
-          return "Failed to save your details. Please try again 😢.";
-        }
-        return "An error occurred. Please try again 😢.";
+        return error || "An error occurred. Please try again 😢.";
       },
     });
 
