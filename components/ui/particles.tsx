@@ -52,18 +52,18 @@ function hexToRgb(hex: string): number[] {
 }
 
 const Particles: React.FC<ParticlesProps> = ({
-  className = "",
-  quantityDesktop = 100,
-  quantityMobile = 50,
-  mobileBreakpoint = 768,
-  staticity = 50,
-  ease = 50,
-  size = 0.4,
-  refresh = false,
-  color = "#ffffff",
-  vx = 0,
-  vy = 0,
-}) => {
+                                               className = "",
+                                               quantityDesktop = 100,
+                                               quantityMobile = 50,
+                                               mobileBreakpoint = 768,
+                                               staticity = 50,
+                                               ease = 50,
+                                               size = 0.6,  // Increased default size for better visibility on white background
+                                               refresh = false,
+                                               color = "#00426E", // Default color set to the requested primary color
+                                               vx = 0,
+                                               vy = 0,
+                                             }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);
@@ -164,11 +164,11 @@ const Particles: React.FC<ParticlesProps> = ({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const pSize = Math.floor(Math.random() * 2) + size;
+    const pSize = Math.floor(Math.random() * 3) + size; // Increased randomness in size
     const alpha = 0;
-    const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
-    const dx = (Math.random() - 0.5) * 0.1;
-    const dy = (Math.random() - 0.5) * 0.1;
+    const targetAlpha = parseFloat((Math.random() * 0.5 + 0.2).toFixed(1)); // Adjusted for better contrast on white
+    const dx = (Math.random() - 0.5) * 0.2; // Slightly faster movement
+    const dy = (Math.random() - 0.5) * 0.2;
     const magnetism = 0.1 + Math.random() * 4;
     return {
       x,
@@ -282,7 +282,7 @@ const Particles: React.FC<ParticlesProps> = ({
 
   return (
     <div
-      className={`${className} fixed inset-0 -z-[100]`}
+      className={`${className} fixed inset-0 -z-[100] bg-white`} // Added bg-white to set white background
       ref={canvasContainerRef}
       aria-hidden="true">
       <canvas ref={canvasRef} style={{ width: "100vw", height: "100vh" }} />

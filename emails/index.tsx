@@ -14,73 +14,76 @@ interface EmailProps {
   userFirstname: string;
 }
 
-export const NotionWaitlistEmail = ({ userFirstname }: EmailProps) => (
+export const SpheresWaitlistEmail = ({ userFirstname }: EmailProps) => (
   <Html>
     <Head />
-    <Preview>Thanks for Joining the Waitlist, {userFirstname}! 🎉</Preview>
+    <Preview>Thanks for joining the Spheres waitlist, {userFirstname}! 🚀</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://nextjs-notion-waitlist.vercel.app/waitlist-logo.png`}
-          width="220"
-          height="100"
-          alt="Notion Waitlist Logo"
+          src={"spheres.png"}
+          width="120"
+          height="120"
+          alt="Spheres Logo"
           style={logo}
         />
         <Text style={greeting}>Hi {userFirstname},</Text>
         <Text style={paragraph}>
-          Thanks for joining the waitlist for our Next.js + Notion CMS waitlist
-          template! I'm Lakshay, the developer behind this project. I'm glad to
-          have you on board.
+          Thanks for joining the waitlist for Spheres – Your AI-Powered Networking Assistant! I&#39;m excited to have you on board.
         </Text>
         <Text style={paragraph}>
-          I'll keep you posted on the progress and notify you as soon as it's
-          ready for you to use. In the meantime, if you have any questions or
-          feedback, don't hesitate to reach out by replying directly to{" "}
-          <a href="mailto:lakshb.work@gmail.com" style={link}>
-            this email {""}
-          </a>
-          — I'm here to listen!
+          Most students and young professionals struggle with what comes <i>after</i> the first connection. That&#39;s why we&#39;re building Spheres to help you build, grow, and maintain meaningful relationships – without the guesswork.
         </Text>
         <Text style={paragraph}>
-          You can also follow me on X/Twitter for updates:{" "}
-          <a href="https://x.com/blakssh" style={link}>
-            @blakssh
-          </a>
+          With Spheres, you&#39;ll be able to:
+        </Text>
+        <Text style={{...paragraph, paddingLeft: '20px'}}>
+          ✅ Know exactly who to reach out to<br />
+          ✅ Get AI-generated follow-up messages<br />
+          ✅ Stay on track with smart reminders<br />
+          ✅ Align networking with your career goals
+        </Text>
+        <Text style={paragraph}>
+          I&#39;ll keep you updated on our progress and let you know as soon as Spheres is ready for you to try. You&#39;ll be among the first to experience this powerful networking tool!
+        </Text>
+        <Text style={paragraph}>
+          If you have any questions or thoughts about networking challenges you&#39;d like Spheres to address, feel free to reply directly to{" "}
+          <a href="mailto:contact@spheres.ai" style={link}>
+            this email
+          </a>.
         </Text>
         <Text style={signOff}>
-          Best regards,
+          Looking forward to supercharging your network,
           <br />
-          Lakshay
+          The Spheres Team
         </Text>
         <Hr style={hr} />
         <Text style={footer}>
-          You received this email because you signed up for the Notion waitlist.
-          If you believe this is a mistake, feel free to ignore this email.
+          You received this email because you signed up for the Spheres waitlist.
+          If you believe this is a mistake, you can ignore this email.
         </Text>
       </Container>
     </Body>
   </Html>
 );
 
-NotionWaitlistEmail.PreviewProps = {
-  userFirstname: "Tyler",
+SpheresWaitlistEmail.PreviewProps = {
+  userFirstname: "Nick",
 } as EmailProps;
 
-export default NotionWaitlistEmail;
+export default SpheresWaitlistEmail;
 
 const main = {
-  background: "linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%)",
+  background: "#ffffff",
   fontFamily: 'figtree, "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: "40px 0",
-  color: "#cccccc",
+  color: "#333333",
 };
 
 const container = {
   margin: "0 auto",
   padding: "24px 32px 48px",
-  backgroundColor: "#1a1a1a",
-  borderRadius: "12px",
+  backgroundColor: "#FFFFFF",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
   maxWidth: "600px",
 };
@@ -91,8 +94,9 @@ const logo = {
 };
 
 const greeting = {
-  fontSize: "18px",
+  fontSize: "20px",
   lineHeight: "28px",
+  fontWeight: "600",
 };
 
 const paragraph = {
@@ -102,7 +106,7 @@ const paragraph = {
 };
 
 const link = {
-  color: "#F7FF9B",
+  color: "#00664E",
   textDecoration: "underline",
 };
 
@@ -113,11 +117,11 @@ const signOff = {
 };
 
 const hr = {
-  borderColor: "#cccccc",
+  borderColor: "rgba(255, 255, 255, 0.2)",
   margin: "20px 0",
 };
 
 const footer = {
-  color: "#8c8c8c",
+  color: "#777",
   fontSize: "12px",
 };
